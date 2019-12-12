@@ -1,19 +1,25 @@
+@charset "UTF-8";
+
 body {
-    background-color: #263238;
+  background-color: #263238;
 }
 h1 {
-    color: #FFFFFF;
+  color: #FFFFFF;
 }
 table {
-    width: 400px; /* 表の幅 */
-    height: 50px; /* 表の高さ */
-    /* 中央揃えにする */
-    margin-left: auto;
-    margin-right: auto;
+  width: 400px; /* 表の幅 */
+  height: 50px; /* 表の高さ */
+  /* 中央揃えにする */
+  margin-left: auto;
+  margin-right: auto;
 }
   
 td {
-    width: 7.14%; /* セルの幅 */
-    height: 5%; /* セルの高さ */
-    background-color: #455A64; /* 背景色 */
+  width: 7.14%; /* セルの幅 */
+  height: 5%; /* セルの高さ */
+  background-color: #455A64; /* 背景色 */
+}
+
+.result{
+  color: #FFFFFF;
 }
