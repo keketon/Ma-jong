@@ -4,6 +4,7 @@ pin: 11-19
 sou: 21-29
 ji: 31-37
 unused: 0, 10, 20, 30
+計34ID
 */
 var Tiles = [
   1, 2, 3, 4, 5, 6, 7, 8, 9,          //wanz
@@ -212,8 +213,8 @@ function resetVals(){
 }
 
 //＝＝＝＝UI系処理＝＝＝＝＝
-var atb = document.getElementsByClassName("atb");
-var m1 = document.getElementById("m1");
+var ati = document.getElementsByClassName("ati");
+var exe = document.getElementsByClassName("exeButtons");
 
 document.getElementById("dummy1").style.display = "none";
 document.getElementById("dummy2").style.display = "none";
@@ -224,8 +225,9 @@ document.getElementById("func").onclick = function(){
   displayHand(Hand);
 };
 
+
 for(let i = 1; i < 38; i++){
-  atb[i].addEventListener("click",() => {
+  ati[i].addEventListener("click",() => {
     if(handNum >= 14){
       alert("手牌の数は14枚までです。")
       return;
@@ -244,6 +246,8 @@ for(let i = 1; i < 38; i++){
     }
   }, false);
 }
+
+
 
 document.getElementById("reset").onclick = function(){
   resetHand();
