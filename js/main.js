@@ -1,5 +1,5 @@
-/*牌に使用する「牌ID」。
-wan: 1-9
+/*牌に使用する「牌ID」
+man: 1-9
 pin: 11-19
 sou: 21-29
 ji: 31-37
@@ -7,7 +7,7 @@ unused: 0, 10, 20, 30
 計34ID
 */
 var Tiles = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9,          //wanz
+  1, 2, 3, 4, 5, 6, 7, 8, 9,          //manz
   11, 12, 13, 14, 15, 16, 17, 18, 19, //pinz
   21, 22, 23, 24, 25, 26, 27, 28, 29, //souz
   31, 32, 33, 34, 35, 36, 37          //jihai
@@ -15,7 +15,7 @@ var Tiles = [
 
 //牌IDに対する文字表記の対応表
 var TilesStr = [
-  "func", "m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", //wanz
+  "func", "m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", //manz
   "dummy1", "p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", //pinz
   "dummy2", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", //souz
   "dummy3", "t", "n", "x", "b", "w", "g", "r"                     //jihai
@@ -33,7 +33,20 @@ var imageFiles = [
   "./img/haiga-m/ji5-haku.gif", "./img/haiga-m/ji6-hatsu.gif", "./img/haiga-m/ji7-chun.gif"
 ];
 
-//＝＝＝＝＝以下関数記述＝＝＝＝＝
+//変数宣言
+{
+  var Hand = new Array(38); //手牌
+  for(let i = 0; i < 38; i++){
+    Hand[i] = 0;
+  }
+  var handNum = 0;  //手牌の枚数
+  var head; //雀頭
+  var koutsu = new Array(4);  //刻子を格納
+  var shuntsu = new Array(4); //順子を格納
+  var koutsuNum = 0;  //刻子の数
+  var shuntsuNum = 0; //順子の数
+}
+
 
 //＝＝＝＝＝汎用関数＝＝＝＝＝
 //0以上x未満の整数の乱数を返す。
@@ -58,21 +71,6 @@ function resetHand(){
   handNum = 0;
 }
 
-//＝＝＝＝＝判定系処理＝＝＝＝＝
-//変数宣言
-{
-var Hand = new Array(38); //手牌
-for(let i = 0; i < 38; i++){
-  Hand[i] = 0;
-}
-var handNum = 0;  //手牌の枚数
-var head; //雀頭
-var koutsu = new Array(4);  //刻子を格納
-var shuntsu = new Array(4); //順子を格納
-var koutsuNum = 0;  //刻子の数
-var shuntsuNum = 0; //順子の数
-}
-
 /*
 //ランダムに手牌を14枚構築
 
@@ -93,8 +91,8 @@ for(let i = 0; i < 14; i++){
 }
 */
 
+
 //＝＝＝＝＝UI系処理＝＝＝＝＝
-//クラス宣言
 
 //handImage: 手牌画像
 var hi = document.getElementsByClassName("hi");
