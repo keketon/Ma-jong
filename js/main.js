@@ -41,6 +41,7 @@ function rand(x){
   return Math.floor(Math.random() * x);
 }
 
+//手牌の表示
 function outHand(hand){
   console.log("現在の手牌：\n");
   for(let i = 0; i < 38; i++){
@@ -49,6 +50,7 @@ function outHand(hand){
   console.log("\n");
 }
 
+//手牌のリセット（Hand配列のゼロ化）
 function resetHand(){
   for(let i = 0; i < 38; i++){
     Hand[i] = 0;
@@ -57,6 +59,8 @@ function resetHand(){
 }
 
 //＝＝＝＝＝判定系処理＝＝＝＝＝
+//変数宣言
+{
 var Hand = new Array(38); //手牌
 for(let i = 0; i < 38; i++){
   Hand[i] = 0;
@@ -68,6 +72,7 @@ var koutsu = new Array(4);  //刻子を格納
 var shuntsu = new Array(4); //順子を格納
 var koutsuNum = 0;  //刻子の数
 var shuntsuNum = 0; //順子の数
+}
 
 /*
 //ランダムに手牌を14枚構築
@@ -88,7 +93,7 @@ for(let i = 0; i < 14; i++){
   console.log(j + "\n");
 }
 */
-//牌を使い切ったかどうかの判定関数
+//牌を使い切ったかどうか（アガリかどうか）の判定
 function checkUseOut(hand){
   for(let i = 0; i < 38; i++){
     if(hand[i] > 0) {return false}
@@ -107,6 +112,7 @@ function checkKoutsu(hand, num){
   }
 }
 
+//順子の抜き出し
 function checkShuntsu(hand){
   //字牌と8,9牌は関係ないので28
   for(let i = 0; i < 28; i++){
@@ -183,7 +189,7 @@ function checkNormalHele(hand){
   }
 }
 
-//七対子の判定。暗刻含みは考慮しない
+//七対子の判定。槓子含みは考慮しない
 function checkSevenpairs(hand){
 
   var tmpHand = hand.slice(0, hand.length);
@@ -195,15 +201,17 @@ function checkSevenpairs(hand){
   if(checkUseOut(tmpHand)) {return true;}
 }
 
-function checkHele(hand){
+//総合的なアガリ判定
+function checkHele(){
   if(handNum !== 14) return false;
-  if(checkKokushi(hand)) return true;
-  if(checkNormalHele(hand)) return true;
-  if(checkSevenpairs(hand)) return true;
+  if(checkKokushi(Hand)) return true;
+  if(checkNormalHele(Hand)) return true;
+  if(checkSevenpairs(Hand)) return true;
   
   return false;
 }
 
+//変数のリセット。アガリ判定中に使用
 function resetVals(){
   for(let i = 0; i < 4; i++){
     koutsu[i] = 0;
@@ -212,20 +220,52 @@ function resetVals(){
   head = koutsuNum = shuntsuNum = 0;
 }
 
-//＝＝＝＝UI系処理＝＝＝＝＝
+
+//＝＝＝＝＝UI系処理＝＝＝＝＝
+//クラス宣言
+
+//handImage: 手牌画像
+var hi = document.getElementsByClassName("hi");
+
+//addTileImage: 手牌に牌を加える画像付きボタン
 var ati = document.getElementsByClassName("ati");
+
+//仮
 var exe = document.getElementsByClassName("exeButtons");
 
+
+//ダミーボタンの不可視化
+{
 document.getElementById("dummy1").style.display = "none";
 document.getElementById("dummy2").style.display = "none";
 document.getElementById("dummy3").style.display = "none";
+}
 
+//func button
 document.getElementById("func").onclick = function(){
   outHand(Hand);
   displayHand(Hand);
 };
 
 
+//hiの動作
+for(let i = 0; i < 14; i++){
+  hi[i].addEventListener("click",() => {
+    let cnt = 0;
+    for(let j = 1; j < 38; j++){
+      cnt += Hand[j];
+      if(cnt > i) {
+        Hand[j]--;
+        handNum--;
+        break;
+      }
+    }
+
+    updateDisplay();
+  }, false);
+}
+
+//atiの動作
 for(let i = 1; i < 38; i++){
   ati[i].addEventListener("click",() => {
     if(handNum >= 14){
@@ -236,29 +276,26 @@ for(let i = 1; i < 38; i++){
       alert("1種の牌は4枚までです。")
       return;
     }
+
     Hand[i]++;
     handNum++;
-    displayHand(Hand);
-    if(checkHele(Hand)){
-      document.getElementById("displayHele").textContent = "アガリです";
-    }else{
-      document.getElementById("displayHele").textContent = "";
-    }
+    updateDisplay();
   }, false);
 }
 
 
-
+//resetの動作
 document.getElementById("reset").onclick = function(){
   resetHand();
   document.getElementById("displayHele").textContent = "";
-  displayHand(Hand);
+  displayHand();
 };
 
-function displayHand(hand){
+//手牌表示の動作
+function displayHand(){
   let num = 1;  //画像表示している数
   for(let i = 1; i < 38; i++){
-    for(let j = 0; j < hand[i]; j++){
+    for(let j = 0; j < Hand[i]; j++){
       document.getElementById("hand" + num).src = imageFiles[i];
       num++;
     }
@@ -268,14 +305,15 @@ function displayHand(hand){
   }
 }
 
-
-
-
-/*
-for(let i = 0; i < 38; i++){
-  console.log(i + " " + btn[i].id);
-}*/
-
+//表示系の更新
+function updateDisplay(){
+  displayHand();
+    if(checkHele()){
+      document.getElementById("displayHele").textContent = "アガリです";
+    }else{
+      document.getElementById("displayHele").textContent = "";
+    }
+}
 
 
 //＝＝＝＝テスト用関数＝＝＝＝＝
