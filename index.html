@@ -4,10 +4,24 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="./js/index_s.js"></script>
+    <script type="text/javascript" src="./js/index_h.js"></script>
   </head>
   <body>
-    <h1 id="title_text">ma-jong</h1>
+
+  
+  <div id = "wrap">
+
+    <h1 id="title_text">アガリ・シャンテン数判定機</h1>
     
+    <div class = "result">
+      <p id = "displayAlert"> 手牌枚数：0 </p>
+      <p id = "displayHele"> </p>
+    </div>
+
+    
+  
     <div class = "handImage">
       <img class = "hi" id = "hand1" src = ""/>
       <img class = "hi" id = "hand2" src = ""/>
@@ -58,10 +72,10 @@
       <img class = "ati" id = "s8" src = "./img/haiga-m/sou8.gif"/>
       <img class = "ati" id = "s9" src = "./img/haiga-m/sou9.gif"/> <br>
       <img class = "ati" id = "dummy3" src = ""/>
-      <img class = "ati" id = "t" src = "./img/haiga-m/ji1-ton.gif"/>
-      <img class = "ati" id = "n" src = "./img/haiga-m/ji2-nan.gif"/>
-      <img class = "ati" id = "x" src = "./img/haiga-m/ji3-sha.gif"/>
-      <img class = "ati" id = "b" src = "./img/haiga-m/ji4-pei.gif"/>
+      <img class = "ati" id = "e" src = "./img/haiga-m/ji1-ton.gif"/>
+      <img class = "ati" id = "s" src = "./img/haiga-m/ji2-nan.gif"/>
+      <img class = "ati" id = "w" src = "./img/haiga-m/ji3-sha.gif"/>
+      <img class = "ati" id = "n" src = "./img/haiga-m/ji4-pei.gif"/>
       <img class = "ati" id = "w" src = "./img/haiga-m/ji5-haku.gif"/>
       <img class = "ati" id = "g" src = "./img/haiga-m/ji6-hatsu.gif"/>
       <img class = "ati" id = "r" src = "./img/haiga-m/ji7-chun.gif"/>
@@ -71,11 +85,12 @@
     <div class = "exeButtons">
         <input type="button" value="reset" class = "eb" id = "reset">
     </div>
-    <div class = "result">
-        <p id = "displayAlert"> </p>
-        <p id = "displayHele"> </p>
-    </div>
-    <script src="./js/main.js"></script>
-    <script src="./js/hele.js"></script>
+
+  </div>
+    
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/hele.js"></script>
+    <script type="text/javascript" src="./js/shanten.js"></script>
+
   </body>
 </html>

@@ -1,8 +1,10 @@
 //＝＝＝＝＝聴牌判定系処理＝＝＝＝＝
 
+const INF = 1000000000; //1e9
+
 //牌を使い切ったかどうか（アガリかどうか）の判定
 function checkUseOut(hand){
-  for(let i = 0; i < 38; i++){
+  for(let i = 1; i < 38; i++){
     if(hand[i] > 0) {return false}
   }
   return true;
@@ -10,7 +12,7 @@ function checkUseOut(hand){
 
 //刻子の抜き出し
 function checkKoutsu(hand, num){
-  for(let i = 0; i < 38; i++){
+  for(let i = 1; i < 38; i++){
     if(hand[i] >= 3) {
       hand[i] -= 3;
       koutsu[koutsuNum++] = i;
@@ -22,7 +24,7 @@ function checkKoutsu(hand, num){
 //順子の抜き出し
 function checkShuntsu(hand){
   //字牌と8,9牌は関係ないので28
-  for(let i = 0; i < 28; i++){
+  for(let i = 1; i < 28; i++){
     if(i % 10 > 7) {continue;}
     while(hand[i] > 0 && hand[i+1] > 0 && hand[i+2] > 0){
       hand[i]--;  hand[i+1]--;  hand[i+2]--;
@@ -32,10 +34,10 @@ function checkShuntsu(hand){
 }
 
 //国士無双の判定
-function heleKokushi(hand){
-  var tmpHand = hand.slice(0, hand.length);
+function heleKokushi(){
+  var tmpHand = Hand.slice(0, Hand.length);
   var findHead = false;
-  for(let i = 0; i < 38; i++){
+  for(let i = 1; i < 38; i++){
     if(i % 10 == 1 || i % 10 == 9 || i > 30) {
       if (!findHead && tmpHand[i] == 2) {
         tmpHand[i] -= 2;
@@ -49,14 +51,14 @@ function heleKokushi(hand){
 }
 
 //国士無双と七対子以外の判定
-function heleNormalHele(hand){
+function heleNormalHele(){
 
-  for(let h = 0; h < 38; h++){
-    var tmpHand = hand.slice(0, hand.length); resetVals();  //変数をリセットする
+  for(let h = 1; h < 38; h++){
+    var tmpHand = Hand.slice(0, Hand.length); resetVals();  //変数をリセットする
 
     if(tmpHand[h] >= 2) {
 
-      tmpHand = hand.slice(0, hand.length); resetVals();  //変数をリセットする
+      tmpHand = Hand.slice(0, Hand.length); resetVals();  //変数をリセットする
       tmpHand[h] -= 2; head = h;  //雀頭抜き出し
 
       //刻子->順子とチェック
@@ -67,7 +69,7 @@ function heleNormalHele(hand){
       }
 
       //順子->刻子とチェック
-      tmpHand = hand.slice(0, hand.length); resetVals();
+      tmpHand = Hand.slice(0, Hand.length); resetVals();
       tmpHand[h] -= 2; head = h;
       checkShuntsu(tmpHand);
       checkKoutsu(tmpHand);
@@ -75,7 +77,7 @@ function heleNormalHele(hand){
       if(checkUseOut(tmpHand)) {return true;}
 
       //刻子1つ取り出し->順子->刻子とチェック
-      tmpHand = hand.slice(0, hand.length); resetVals();
+      tmpHand = Hand.slice(0, Hand.length); resetVals();
       tmpHand[h] -= 2; head = h;
       checkKoutsu(tmpHand, 1);
       checkShuntsu(tmpHand);
@@ -87,10 +89,10 @@ function heleNormalHele(hand){
 }
 
 //七対子の判定。槓子含みは考慮しない
-function heleSevenpairs(hand){
+function heleSevenpairs(){
 
-  var tmpHand = hand.slice(0, hand.length);
-  for(let h = 0; h < 38; h++){
+  var tmpHand = Hand.slice(0, Hand.length);
+  for(let h = 1; h < 38; h++){
     if(tmpHand[h] === 2){
       tmpHand[h] -= 2;
     }
@@ -101,18 +103,9 @@ function heleSevenpairs(hand){
 //総合的なアガリ判定
 function checkHele(){
   if(handNum !== 14) return false;
-  if(heleKokushi(Hand)) return true;
-  if(heleNormalHele(Hand)) return true;
-  if(heleSevenpairs(Hand)) return true;
+  if(heleKokushi()) return true;
+  if(heleNormalHele()) return true;
+  if(heleSevenpairs()) return true;
   
   return false;
-}
-
-//変数のリセット。アガリ判定中に使用
-function resetVals(){
-  for(let i = 0; i < 4; i++){
-    koutsu[i] = 0;
-    shuntsu[i] = 0;
-  }
-  head = koutsuNum = shuntsuNum = 0;
 }

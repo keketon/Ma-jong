@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-  background-color: #263238;
+  background-color: #228b22;
 }
 h1 {
   color: #FFFFFF;
@@ -24,44 +24,22 @@ td {
   color: #FFFFFF;
 }
 
-/* 牌画像クリック時のアクション追加 */
-img.ati:hover{
- 
-	/* 透明度を上げることで、画像の色を薄く見せる。*/
-	opacity:0.5;
- 
-	/* リンクをホバーしたときのカーソルにする。*/
-	cursor: pointer;
-}
- 
-/* 画像をクリックした瞬間 */
-img.ati:active{
- 
-	/* 要素を若干下に下げることで、押した感じを出す。*/
- 
-	/* 今いる位置から相対的に3px下に配置する。*/
-	position: relative;
-	top: 3px;
- 
+.addTileImage, 
+.exeButtons
+{
+  text-align: center;
 }
 
-
-img.hi:hover{
- 
-	/* 透明度を上げることで、画像の色を薄く見せる。*/
-	opacity:0.5;
- 
-	/* リンクをホバーしたときのカーソルにする。*/
-	cursor: pointer;
+.handImage
+{
+  height: 50px;
+  text-align: center;
 }
- 
-/* 画像をクリックした瞬間 */
-img.hi:active{
- 
-	/* 要素を若干下に下げることで、押した感じを出す。*/
- 
-	/* 今いる位置から相対的に3px下に配置する。*/
-	position: relative;
-	top: 3px;
- 
+
+.result
+{
+  height: 100px;
+  text-align: center;
+}
+
 }
