@@ -275,6 +275,7 @@ $(function(){
 
 
   //func button（通常は不可視）
+  $("#func").hide();
   $("#func").click(function(){
     outHand(Hand);
     displayHand(Hand);
