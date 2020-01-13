@@ -23,14 +23,13 @@ function shantenKokushi(){
   var hasPair = false;
   
   for(let i = 1; i < 38; i++){
-    if(i % 10 == 1 || i % 10 == 9 || i > 30) {
+    if(i % 10 === 1 || i % 10 === 9 || i > 30) {
       if(Hand[i] >= 1) shanten--;
       if(Hand[i] >= 2) hasPair = true;
     }
   }
 
   if(hasPair) shanten--;
-
   return shanten;
 }
 
@@ -120,7 +119,7 @@ function shantenSevenpairs(){
 }
   
 /*
-総合的なアガリ判定
+総合的なシャンテン計算
 返り値はシャンテン数とアガリパターンを持つオブジェクト
 */
 function checkShanten(){
@@ -132,15 +131,16 @@ function checkShanten(){
   それらの論理和を返す。
   */
 
-  var pattern = 1;
-  var shanten = shantenKokushi();
-  
-  var tmpShanten = shantenNormalHele();
+  var pattern = 2;
+  var shanten = shantenNormalHele();
+  if(cancelKS) return {shanten, pattern};
+
+  var tmpShanten = shantenKokushi();
   if(tmpShanten < shanten){
     shanten = tmpShanten;
-    pattern = 2;
+    pattern = 1;
   }else if(tmpShanten === shanten){
-    pattern += 2;
+    pattern += 1;
   }
 
   tmpShanten = shantenSevenpairs();
@@ -150,6 +150,5 @@ function checkShanten(){
   }else if(tmpShanten === shanten){
     pattern += 4;
   }
-
   return {shanten, pattern};
 }

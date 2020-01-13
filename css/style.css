@@ -1,9 +1,8 @@
 @charset "UTF-8";
 
-body {
-  background-color: #228b22;
-}
-h1 {
+h1,
+h2
+{
   color: #FFFFFF;
 }
 table {
@@ -13,15 +12,18 @@ table {
   margin-left: auto;
   margin-right: auto;
 }
-  
+
 td {
   width: 7.14%; /* セルの幅 */
   height: 5%; /* セルの高さ */
   background-color: #455A64; /* 背景色 */
 }
 
-.result{
+.result,
+.validText
+{
   color: #FFFFFF;
+  text-align: center;
 }
 
 .addTileImage, 
@@ -39,7 +41,10 @@ td {
 .result
 {
   height: 100px;
-  text-align: center;
 }
 
+.validTile
+{
+  height: 30px;
+  text-align: center;
 }

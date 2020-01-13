@@ -23,13 +23,13 @@ var TilesStr = [
 
 //牌IDと画像ファイルの対応表
 var imageFiles = [
-  "", "./img/haiga-m/man1.gif", "./img/haiga-m/man2.gif", "./img/haiga-m/man3.gif", "./img/haiga-m/man4.gif",
-  "./img/haiga-m/man5.gif", "./img/haiga-m/man6.gif", "./img/haiga-m/man7.gif", "./img/haiga-m/man8.gif",  "./img/haiga-m/man9.gif",
-  "", "./img/haiga-m/pin1.gif", "./img/haiga-m/pin2.gif", "./img/haiga-m/pin3.gif", "./img/haiga-m/pin4.gif",
-  "./img/haiga-m/pin5.gif", "./img/haiga-m/pin6.gif", "./img/haiga-m/pin7.gif", "./img/haiga-m/pin8.gif",  "./img/haiga-m/pin9.gif",
-  "", "./img/haiga-m/sou1.gif", "./img/haiga-m/sou2.gif", "./img/haiga-m/sou3.gif", "./img/haiga-m/sou4.gif",
-  "./img/haiga-m/sou5.gif", "./img/haiga-m/sou6.gif", "./img/haiga-m/sou7.gif", "./img/haiga-m/sou8.gif",  "./img/haiga-m/sou9.gif",
-  "", "./img/haiga-m/ji1-ton.gif", "./img/haiga-m/ji2-nan.gif", "./img/haiga-m/ji3-sha.gif", "./img/haiga-m/ji4-pei.gif",
+  "", "./img/haiga-m/man1.gif", "./img/haiga-m/man2.gif", "./img/haiga-m/man3.gif", "./img/haiga-m/man4.gif", "./img/haiga-m/man5.gif",
+  "./img/haiga-m/man6.gif", "./img/haiga-m/man7.gif", "./img/haiga-m/man8.gif",  "./img/haiga-m/man9.gif", "./img/haiga-m/man-aka5.gif",
+  "./img/haiga-m/pin1.gif", "./img/haiga-m/pin2.gif", "./img/haiga-m/pin3.gif", "./img/haiga-m/pin4.gif", "./img/haiga-m/pin5.gif",
+  "./img/haiga-m/pin6.gif", "./img/haiga-m/pin7.gif", "./img/haiga-m/pin8.gif",  "./img/haiga-m/pin9.gif", "./img/haiga-m/pin-aka5.gif",
+  "./img/haiga-m/sou1.gif", "./img/haiga-m/sou2.gif", "./img/haiga-m/sou3.gif", "./img/haiga-m/sou4.gif", "./img/haiga-m/sou5.gif",
+  "./img/haiga-m/sou6.gif", "./img/haiga-m/sou7.gif", "./img/haiga-m/sou8.gif",  "./img/haiga-m/sou9.gif", "./img/haiga-m/sou-aka5.gif",
+  "./img/haiga-m/ji1-ton.gif", "./img/haiga-m/ji2-nan.gif", "./img/haiga-m/ji3-sha.gif", "./img/haiga-m/ji4-pei.gif",
   "./img/haiga-m/ji5-haku.gif", "./img/haiga-m/ji6-hatsu.gif", "./img/haiga-m/ji7-chun.gif"
 ];
 
@@ -57,6 +57,8 @@ var imageFiles = [
     "通常手",
     "七対子"
   ]; //patternと文字との対応
+  var cancelKS = false; //国士と七対子をキャンセルするか
+  var redTile = [false, false, false, false];  //左から順にman, pin, souの赤牌の有無
 }
 
 
@@ -81,10 +83,13 @@ function resetHand(){
     Hand[i] = 0;
   }
   handNum = 0;
+  for(let i = 0; i < 4; i++){
+    redTile[i] = false;
+  }
 
   var disp = "";
   disp += "手牌枚数：" + handNum + "\n";
-  document.getElementById("displayAlert").textContent = disp;
+  $("#displayAlert").text(disp);
 }
 
 //変数のリセット
@@ -117,87 +122,25 @@ for(let i = 0; i < 14; i++){
 */
 
 
-//＝＝＝＝＝UI系処理＝＝＝＝＝
-
-//handImage: 手牌画像
-var hi = document.getElementsByClassName("hi");
-
-//addTileImage: 手牌に牌を加える画像付きボタン
-var ati = document.getElementsByClassName("ati");
-
-//仮
-var exe = document.getElementsByClassName("exeButtons");
-
-
-//ダミーボタンの不可視化
-{
-document.getElementById("dummy1").style.display = "none";
-document.getElementById("dummy2").style.display = "none";
-document.getElementById("dummy3").style.display = "none";
-}
-
-//func button
-document.getElementById("func").onclick = function(){
-  outHand(Hand);
-  displayHand(Hand);
-  updateDisplay();
-  //console.log(checkShanten());
-};
-
-
-//hiの動作
-for(let i = 0; i < 14; i++){
-  hi[i].addEventListener("click",() => {
-    let cnt = 0;
-    for(let j = 1; j < 38; j++){
-      cnt += Hand[j];
-      if(cnt > i) {
-        Hand[j]--;
-        handNum--;
-        break;
-      }
-    }
-    
-    updateDisplay();
-  }, false);
-}
-
-//atiの動作
-for(let i = 1; i < 38; i++){
-  ati[i].addEventListener("click",() => {
-    if(handNum >= 14){
-      alert("手牌の数は14枚までです。")
-      return;
-    }
-    if(Hand[i] >= 4){
-      alert("1種の牌は4枚までです。")
-      return;
-    }
-
-    Hand[i]++;
-    handNum++;
-    updateDisplay();
-  }, false);
-}
-
-
-//resetの動作
-document.getElementById("reset").onclick = function(){
-  resetHand();
-  displayHand();
-};
+//＝＝＝＝＝UI系処理用関数＝＝＝＝＝
 
 //手牌表示の動作
 function displayHand(){
   let num = 1;  //画像表示している数
   for(let i = 1; i < 38; i++){
-    for(let j = 0; j < Hand[i]; j++){
-      document.getElementById("hand" + num).src = imageFiles[i];
+    let hasRed = 0;
+    if(i % 10 === 5 && redTile[(i - 5) / 10]){
+      $("#hand" + num).attr("src", imageFiles[i + 5]);
+      hasRed++;
+      num++;
+    }
+    for(let j = hasRed; j < Hand[i]; j++){
+      $("#hand" + num).attr("src", imageFiles[i]);
       num++;
     }
   }
   for(; num <= 14; num++){
-    document.getElementById("hand" + num).src = "";
+    $("#hand" + num).attr("src", "");
   }
 }
 
@@ -205,20 +148,23 @@ function displayHand(){
 function updateDisplay(){
   displayHand();
 
-  document.getElementById("displayAlert").textContent = "手牌枚数：" + handNum;
+  $("#displayAlert").text("手牌枚数：" + handNum);
 
   var disp = "";
-    if(checkHele()){
-      disp += "アガリです\n";
+    if(handNum === 0){
+      disp = "ここにシャンテン数が表示されます";
     }else{
-      var {shanten, pattern} = checkShanten();
-      var patStr = patternToStr(pattern);
-      var shantenStr = (shanten === 1? " テンパイ": (shanten - 1) + " シャンテン");
-      
-      disp += patStr + " の " + shantenStr + "です\n";
+      if(checkHele()){
+        disp += "アガリです\n";
+      }else{
+        var {shanten, pattern} = checkShanten();
+        var patStr = patternToStr(pattern);
+        var shantenStr = (shanten === 1? " テンパイ": (shanten - 1) + " シャンテン");
+        
+        disp += patStr + " の " + shantenStr + "です\n";
+      }
     }
-
-    document.getElementById("displayHele").textContent = disp;
+    $("#displayHele").text(disp);
 }
 
 //整数であらわされたpatternを受取り、"国士無双、面子手"などの文字列を返す
@@ -238,9 +184,13 @@ function patternToStr(pattern){
 }
 
 
-//＝＝＝＝＝jQuery導入＝＝＝＝＝
+//＝＝＝＝＝ロード後jQuery実行部＝＝＝＝＝
 
 $(function(){
+
+  //ダミーボタンの不可視化
+  //$("#func").hide();
+  
   //牌ボタンのアニメ化
   $("img.hi").addClass("opacityAnimation");
   $("img.ati").addClass("opacityAnimation");
@@ -252,39 +202,125 @@ $(function(){
     $(this).stop().animate({"opacity":"1"}, dur);    
   });
 
+  //有効牌表示の初期化（不可視化）
+  $(".vt").hide();
+
+  //＝＝＝＝＝ボタン（画像）動作設定＝＝＝＝＝
+  //hiの動作
+  for(let i = 0; i < 14; i++){
+    $(".hi").eq(i).click(function(){
+      let cnt = 0;
+      //赤牌チェック
+      var isRed = false;
+      var src = $(this).attr('src');
+      if(src.match(/aka/)){
+        isRed = true;
+      }
+      for(let j = 1; j < 38; j++){
+        cnt += Hand[j];
+        if(cnt > i) {
+          Hand[j]--;
+          handNum--;
+          if(isRed){
+            redTile[(j - 5) / 10] = false;
+          }
+          break;
+        }
+      }
+      
+      updateDisplay();
+    });
+  }
+
+  //atiの動作
+  for(let i = 1; i < 38; i++){
+    $(".ati").eq(i).click(function(){
+        if(handNum >= 14){
+        alert("手牌の数は14枚までです。")
+        return;
+      }
+      if(Hand[i] >= 4){
+        alert("1種の牌は4枚までです。")
+        return;
+      }
+
+      Hand[i]++;
+      handNum++;
+      updateDisplay();
+    });
+  }
+
+  //赤牌処理
+  for(let i = 10; i <= 30; i += 10){
+    $(".ati").eq(i).off();
+    $(".ati").eq(i).click(function(){
+        if(handNum >= 14){
+        alert("手牌の数は14枚までです。")
+        return;
+      }
+      if(Hand[i - 5] >= 4){
+        alert("1種の牌は4枚までです。")
+        return;
+      }
+      if(redTile[(i / 10) - 1]){
+        alert("各赤牌は1枚までです。")
+        return;
+      }
+      Hand[i - 5]++;
+      handNum++;
+      redTile[(i / 10) - 1] = true;
+      updateDisplay();
+    });
+  }
+
+
+  //func button（通常は不可視）
+  $("#func").click(function(){
+    outHand(Hand);
+    displayHand(Hand);
+    updateDisplay();
+    var src = $("#hand1").attr('src');
+    console.log(src);
+    if(src.match(/aka/)){
+      console.log("red");
+    }
+  });
+
+  //reset button
+  $("#reset").click(function(){
+    resetHand();
+    displayHand();
+    $("#displayHele").html("ここにシャンテン数が表示されます");
+    $(".vt").hide();
+    $("#validYukou").html("国士・通常手・七対子の中でシャンテン数の最も高いものの有効牌が表示されます<br>通常手のみについて計算したい場合は上のチェックボックスをチェックしてください");
+  });
+
+  //有効牌 buttons
+  $("#validButton").click(function(){
+    if(handNum >= 14){
+      alert("手牌枚数が多すぎます");
+      return;
+    }
+    
+    var remKind = 0;
+    var remNum = 0;
+    $(".vt").hide();
+
+    var {valid, pattern} = checkValid();
+    valid.forEach(function( val ) {
+      $(".vt").eq(val).show();
+      remKind++;
+      remNum += 4 - Hand[val];
+    });
+
+    var disp = patternToStr(pattern) + "の有効牌：" + remKind + "種" + remNum + "枚";
+    $("#validYukou").text(disp);
+
+  });
+
+  //cancelKSボックス
+  $("input[name = 'config']").change(function() {
+    cancelKS = $("#cancelKS").prop("checked");
+    updateDisplay();
+  });
 });
-
-//＝＝＝＝＝テスト用関数＝＝＝＝＝
-
-//test();
-
-function test(hand){
-  var input = [
-    1, 1, 1,
-    4, 5, 6,
-    17, 18, 19,
-    31, 31, 31,
-    36, 36
-  ];
-  var input2 = [
-    1, 2, 3,
-    4, 5, 6,
-    17, 18, 19,
-    24, 25, 26,
-    36, 36
-  ];
-  var input3 = [//kokushi
-    1, 9,
-    11, 19,
-    21, 29,
-    31, 32, 33, 34,
-    35, 36, 37, 37
-  ];
-  var input4 = [//7pair
-    1, 1, 4, 4,
-    6, 6, 22, 22,
-    17, 17, 25, 25,
-    36, 36
-  ];
-
-}

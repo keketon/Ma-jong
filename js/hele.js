@@ -5,7 +5,7 @@ const INF = 1000000000; //1e9
 //牌を使い切ったかどうか（アガリかどうか）の判定
 function checkUseOut(hand){
   for(let i = 1; i < 38; i++){
-    if(hand[i] > 0) {return false}
+    if(hand[i] > 0) {return false;}
   }
   return true;
 }
@@ -16,7 +16,7 @@ function checkKoutsu(hand, num){
     if(hand[i] >= 3) {
       hand[i] -= 3;
       koutsu[koutsuNum++] = i;
-      if (num > 0 && koutsuNum == num) {return;}
+      if (num > 0 && koutsuNum === num) {return;}
     }
   }
 }
@@ -38,15 +38,16 @@ function heleKokushi(){
   var tmpHand = Hand.slice(0, Hand.length);
   var findHead = false;
   for(let i = 1; i < 38; i++){
-    if(i % 10 == 1 || i % 10 == 9 || i > 30) {
-      if (!findHead && tmpHand[i] == 2) {
+    if(i % 10 === 1 || i % 10 === 9 || i > 30) {
+      if(!findHead && tmpHand[i] === 2){
         tmpHand[i] -= 2;
-        findHead == true;
-      }else if(tmpHand[i] == 1){
+        findHead = true;
+      }else if(tmpHand[i] === 1){
         tmpHand[i]--;
       }
     }
   }
+  
   return checkUseOut(tmpHand);
 }
 
@@ -103,8 +104,10 @@ function heleSevenpairs(){
 //総合的なアガリ判定
 function checkHele(){
   if(handNum !== 14) return false;
-  if(heleKokushi()) return true;
+  
   if(heleNormalHele()) return true;
+  if(cancelKS) return false;
+  if(heleKokushi()) return true;
   if(heleSevenpairs()) return true;
   
   return false;
