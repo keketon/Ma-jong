@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>keke's portfolio</title>
+    <link rel="stylesheet" href="./bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="./bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="./js/index_s.js"></script>
+    <script type="text/javascript" src="./js/index_h.js"></script>
+
+    <style>
+      body {
+        background-color: green;
+      }
+
+      h1,
+      h2{
+        color: whitesmoke;
+      }
+  
+    </style>
+  </head>
+  
+  <body>
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      
+        <a href="#" class="navbar-brand">keke's portfolio</a>
+
+        <ul class="nav navbar-nav mr-auto">
+          <li>
+            <a class="nav-link" href="index.html">TOP</a>
+          </li>
+          <li>
+            <a class="nav-link active" href="Ma-jong.html">シャンテン数</a>
+          </li>
+          <li>
+            <a class="nav-link" href="test.html">test page</a class="nav-link">
+          </li>
+          <li>
+            <a class="nav-link" href="about_me.html">About Me</a class="nav-link">
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav">
+          <li>
+            <a class="nav-link" href="https://github.com/keketon" target="_brank">
+              GitHub</a class="nav-link">
+          </li>
+        </ul>
+    </nav>
+    
+    <h2 id="title_text">アガリ・シャンテン数判定機</h2>
+    
+    <div class = "result">
+      <p id = "displayAlert">手牌枚数：0</p>
+      <p id = "displayHele">ここにシャンテン数が表示されます</p>
+    </div>
+
+    <div class = "handImage">
+      <img class = "hi" id = "hand1" src = ""/>
+      <img class = "hi" id = "hand2" src = ""/>
+      <img class = "hi" id = "hand3" src = ""/>
+      <img class = "hi" id = "hand4" src = ""/>
+      <img class = "hi" id = "hand5" src = ""/>
+      <img class = "hi" id = "hand6" src = ""/>
+      <img class = "hi" id = "hand7" src = ""/>
+      <img class = "hi" id = "hand8" src = ""/>
+      <img class = "hi" id = "hand9" src = ""/>
+      <img class = "hi" id = "hand10" src = ""/>
+      <img class = "hi" id = "hand11" src = ""/>
+      <img class = "hi" id = "hand12" src = ""/>
+      <img class = "hi" id = "hand13" src = ""/>
+      <img class = "hi" id = "hand14" src = ""/>
+    </div>
+
+    <!--以下のボタンは順番を変えてはいけない（動作に影響する）-->
+    <div class = "addTileImage">
+      <img class = "ati" id = "func" src = "./img/haiga-m/ura.gif"/> <br>
+      <img class = "ati" id = "m1" src = "./img/haiga-m/man1.gif"/>
+      <img class = "ati" id = "m2" src = "./img/haiga-m/man2.gif"/>
+      <img class = "ati" id = "m3" src = "./img/haiga-m/man3.gif"/>
+      <img class = "ati" id = "m4" src = "./img/haiga-m/man4.gif"/>
+      <img class = "ati" id = "m5" src = "./img/haiga-m/man5.gif"/>
+      <img class = "ati" id = "m6" src = "./img/haiga-m/man6.gif"/>
+      <img class = "ati" id = "m7" src = "./img/haiga-m/man7.gif"/>
+      <img class = "ati" id = "m8" src = "./img/haiga-m/man8.gif"/>
+      <img class = "ati" id = "m9" src = "./img/haiga-m/man9.gif"/>
+      <img class = "ati" id = "m5r" src = "./img/haiga-m/man-aka5.gif"/> <br>
+      <img class = "ati" id = "p1" src = "./img/haiga-m/pin1.gif"/>
+      <img class = "ati" id = "p2" src = "./img/haiga-m/pin2.gif"/>
+      <img class = "ati" id = "p3" src = "./img/haiga-m/pin3.gif"/>
+      <img class = "ati" id = "p4" src = "./img/haiga-m/pin4.gif"/>
+      <img class = "ati" id = "p5" src = "./img/haiga-m/pin5.gif"/>
+      <img class = "ati" id = "p6" src = "./img/haiga-m/pin6.gif"/>
+      <img class = "ati" id = "p7" src = "./img/haiga-m/pin7.gif"/>
+      <img class = "ati" id = "p8" src = "./img/haiga-m/pin8.gif"/>
+      <img class = "ati" id = "p9" src = "./img/haiga-m/pin9.gif"/>
+      <img class = "ati" id = "p5r" src = "./img/haiga-m/pin-aka5.gif"/> <br>
+      <img class = "ati" id = "s1" src = "./img/haiga-m/sou1.gif"/>
+      <img class = "ati" id = "s2" src = "./img/haiga-m/sou2.gif"/>
+      <img class = "ati" id = "s3" src = "./img/haiga-m/sou3.gif"/>
+      <img class = "ati" id = "s4" src = "./img/haiga-m/sou4.gif"/>
+      <img class = "ati" id = "s5" src = "./img/haiga-m/sou5.gif"/>
+      <img class = "ati" id = "s6" src = "./img/haiga-m/sou6.gif"/>
+      <img class = "ati" id = "s7" src = "./img/haiga-m/sou7.gif"/>
+      <img class = "ati" id = "s8" src = "./img/haiga-m/sou8.gif"/>
+      <img class = "ati" id = "s9" src = "./img/haiga-m/sou9.gif"/>
+      <img class = "ati" id = "s5r" src = "./img/haiga-m/sou-aka5.gif"/> <br>
+      <img class = "ati" id = "e" src = "./img/haiga-m/ji1-ton.gif"/>
+      <img class = "ati" id = "s" src = "./img/haiga-m/ji2-nan.gif"/>
+      <img class = "ati" id = "w" src = "./img/haiga-m/ji3-sha.gif"/>
+      <img class = "ati" id = "n" src = "./img/haiga-m/ji4-pei.gif"/>
+      <img class = "ati" id = "w" src = "./img/haiga-m/ji5-haku.gif"/>
+      <img class = "ati" id = "g" src = "./img/haiga-m/ji6-hatsu.gif"/>
+      <img class = "ati" id = "r" src = "./img/haiga-m/ji7-chun.gif"/>
+    </div>
+    <!--以上のボタンは順番を変えてはいけない（動作に影響する）-->
+
+
+    <div class = "exeButtons">
+      <input type = "checkbox" name = "config" value = "cancelKS" id = "cancelKS">国士・七対子は除く<br>
+      <input type = "button" value = "reset" class = "eb" id = "reset">
+      <input type = "button" value = "有効牌計算" class = "eb" id = "validButton">
+    </div>
+
+    <div class = "validText">
+      <p id = "validYukou">
+        国士・通常手・七対子の中でシャンテン数の最も高いものの有効牌が表示されます<br>
+        通常手のみについて計算したい場合は上のチェックボックスをチェックしてください
+      </p>
+
+    </div>
+
+    <div class = "validTile">
+      <img class = "vt" id = "vfunc" src = ""/> <br>
+      <img class = "vt" id = "vm1" src = "./img/haiga-m/man1.gif"/>
+      <img class = "vt" id = "vm2" src = "./img/haiga-m/man2.gif"/>
+      <img class = "vt" id = "vm3" src = "./img/haiga-m/man3.gif"/>
+      <img class = "vt" id = "vm4" src = "./img/haiga-m/man4.gif"/>
+      <img class = "vt" id = "vm5" src = "./img/haiga-m/man5.gif"/>
+      <img class = "vt" id = "vm6" src = "./img/haiga-m/man6.gif"/>
+      <img class = "vt" id = "vm7" src = "./img/haiga-m/man7.gif"/>
+      <img class = "vt" id = "vm8" src = "./img/haiga-m/man8.gif"/>
+      <img class = "vt" id = "vm9" src = "./img/haiga-m/man9.gif"/>
+      <img class = "vt" id = "vdummy1" src = ""/>
+      <img class = "vt" id = "vp1" src = "./img/haiga-m/pin1.gif"/>
+      <img class = "vt" id = "vp2" src = "./img/haiga-m/pin2.gif"/>
+      <img class = "vt" id = "vp3" src = "./img/haiga-m/pin3.gif"/>
+      <img class = "vt" id = "vp4" src = "./img/haiga-m/pin4.gif"/>
+      <img class = "vt" id = "vp5" src = "./img/haiga-m/pin5.gif"/>
+      <img class = "vt" id = "vp6" src = "./img/haiga-m/pin6.gif"/>
+      <img class = "vt" id = "vp7" src = "./img/haiga-m/pin7.gif"/>
+      <img class = "vt" id = "vp8" src = "./img/haiga-m/pin8.gif"/>
+      <img class = "vt" id = "vp9" src = "./img/haiga-m/pin9.gif"/>
+      <img class = "vt" id = "vdummy2" src = ""/>
+      <img class = "vt" id = "vs1" src = "./img/haiga-m/sou1.gif"/>
+      <img class = "vt" id = "vs2" src = "./img/haiga-m/sou2.gif"/>
+      <img class = "vt" id = "vs3" src = "./img/haiga-m/sou3.gif"/>
+      <img class = "vt" id = "vs4" src = "./img/haiga-m/sou4.gif"/>
+      <img class = "vt" id = "vs5" src = "./img/haiga-m/sou5.gif"/>
+      <img class = "vt" id = "vs6" src = "./img/haiga-m/sou6.gif"/>
+      <img class = "vt" id = "vs7" src = "./img/haiga-m/sou7.gif"/>
+      <img class = "vt" id = "vs8" src = "./img/haiga-m/sou8.gif"/>
+      <img class = "vt" id = "vs9" src = "./img/haiga-m/sou9.gif"/>
+      <img class = "vt" id = "vdummy3" src = ""/>
+      <img class = "vt" id = "ve" src = "./img/haiga-m/ji1-ton.gif"/>
+      <img class = "vt" id = "vs" src = "./img/haiga-m/ji2-nan.gif"/>
+      <img class = "vt" id = "vw" src = "./img/haiga-m/ji3-sha.gif"/>
+      <img class = "vt" id = "vn" src = "./img/haiga-m/ji4-pei.gif"/>
+      <img class = "vt" id = "vw" src = "./img/haiga-m/ji5-haku.gif"/>
+      <img class = "vt" id = "vg" src = "./img/haiga-m/ji6-hatsu.gif"/>
+      <img class = "vt" id = "vr" src = "./img/haiga-m/ji7-chun.gif"/>
+    </div>
+
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/hele.js"></script>
+    <script type="text/javascript" src="./js/shanten.js"></script>
+    <script type="text/javascript" src="./js/valid.js"></script>
+
+  </body>
+</html>

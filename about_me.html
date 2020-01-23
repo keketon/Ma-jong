@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="./css/style.css">
     <script type="text/javascript" src="./js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="./bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    <!--読み込み停止用
+    <script type="text/javascript" src="./js/index_s.js"></script>
+    <script type="text/javascript" src="./js/index_h.js"></script>
+    -->
 
   </head>
-  
   <body>
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -20,7 +23,7 @@
 
         <ul class="nav navbar-nav mr-auto">
           <li>
-            <a class="nav-link active" href="index.html">TOP</a>
+            <a class="nav-link" href="index.html">TOP</a>
           </li>
           <li>
             <a class="nav-link" href="Ma-jong.html">シャンテン数</a>
@@ -29,7 +32,7 @@
             <a class="nav-link" href="test.html">test page</a class="nav-link">
           </li>
           <li>
-            <a class="nav-link" href="about_me.html">About Me</a class="nav-link">
+            <a class="nav-link active" href="about_me.html">About Me</a class="nav-link">
           </li>
         </ul>
 
@@ -41,34 +44,16 @@
         </ul>
     </nav>
     
-
+    <h2 id="title_text">About Me</h2>
     
-    <div class="container">
-      <div class="jumbotron">
-        <h1>Welcome to my portfolio Page.</h1>
-      </div>
+    <div id="career">
+        <h3 id="career_title">Career</h3>
+        <p>経歴を書く</p>
     </div>
 
-    <div class="container">
-      <div class="jumbotron">
-        <h1>Ma-jong Shan-ten calculator</h1>
-        <h2>麻雀の手牌を入力することで、向聴数を計算することができます</h2>
-        <!--背景画像を追加しましょう-->
-        <div>
-          <a class="btn btn-primary btn-lg" href="Ma-jong.html" role="button">向聴数計算機へ</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="jumbotron">
-        <h1>About Me</h1>
-        <h2>私のプロフィール</h2>
-        <!--背景画像を追加しましょう-->
-        <div>
-          <a class="btn btn-primary btn-lg" href="about_me.html" role="button">About Meへ</a>
-        </div>
-      </div>
+    <div id="tech">
+        <h3 id="tech_title">Technique</h3>
+        <p>技術を書く</p>
     </div>
 
   </body>
