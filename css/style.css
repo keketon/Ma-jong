@@ -12,12 +12,24 @@ h3 {
   color: whitesmoke;
 }
 
-body {
-  background-color: whitesmoke;
+html {
+  position: relative;
+  min-height: 100%;
 }
 
-div {
-  margin: 4px;
+body {
+  background-color: whitesmoke;
+  /* Margin bottom by footer height */
+  margin-bottom: 30px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  background-color: #333333;
 }
 
 .result,
